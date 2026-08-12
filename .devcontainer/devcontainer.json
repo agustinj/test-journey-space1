@@ -1,0 +1,27 @@
+{
+  "name": "TestJourney - Week 1 environment",
+
+  // Imagen oficial de Playwright: ya trae Node + los navegadores (Chromium,
+  // Firefox, WebKit) + todas las librerías de sistema que necesitan para
+  // correr en modo headless. Esto es justo lo que suele fallar en una compu
+  // local mal configurada, así que lo resolvemos a nivel del contenedor en
+  // vez de a nivel de cada alumno.
+  "image": "mcr.microsoft.com/playwright:latest",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-playwright.playwright",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "CucumberOpen.cucumber-official"
+      ]
+    }
+  },
+
+  // OJO: esto NO instala el proyecto (no hay package.json todavía a
+  // propósito). Solo confirma que el entorno de base está sano, para que
+  // cuando el alumno llegue al checkpoint 2-3 del runbook (npm install,
+  // playwright install), no se tope con errores de sistema operativo.
+  "postCreateCommand": "node -v && npm -v && npx playwright --version && echo '✅ Entorno base listo. Node, npm y los navegadores de Playwright ya están disponibles. El resto (package.json, tsconfig, cucumber) lo arma el alumno con Marcos.'"
+}
