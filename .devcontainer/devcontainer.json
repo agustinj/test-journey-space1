@@ -20,8 +20,25 @@
   },
 
   // OJO: esto NO instala el proyecto (no hay package.json todavía a
-  // propósito). Solo confirma que el entorno de base está sano, para que
-  // cuando el alumno llegue al checkpoint 2-3 del runbook (npm install,
-  // playwright install), no se tope con errores de sistema operativo.
-  "postCreateCommand": "node -v && npm -v && echo '✅ Entorno base listo (Node + npm). Los navegadores de Playwright ya vienen cacheados en la imagen — el resto (package.json, tsconfig, cucumber) lo arma el alumno con Marcos.'"
+  // propósito). Solo confirma que Node/npm están sanos.
+  //
+  // IMPORTANTE: no llamamos a "npx playwright --version" acá. Sin un
+  // package.json local, npx no encuentra el paquete instalado y trata de
+  // resolverlo — en un shell no interactivo (como postCreateCommand) eso
+  // puede quedarse esperando una confirmación que nunca llega, y el setup
+  // parece "colgado" para siempre. Los navegadores de Playwright ya están
+  // cacheados en la imagen de todos modos (no dependen de este chequeo);
+  // el alumno los va a poder usar en cuanto instale el paquete "playwright"
+  // como parte del checkpoint 2-3 del runbook.
+  //
+  // NUEVO (detectado en una prueba real): "npx -y playwright@latest
+  // install-deps" instala las LIBRERÍAS DE SISTEMA LINUX que necesitan
+  // los navegadores, alineadas a la versión "latest" de npm — la misma
+  // que cada alumno va a instalar después con "npm init playwright@latest".
+  // Esto existe porque la imagen base de Microsoft puede quedar "cacheada"
+  // en una versión de Playwright más vieja que la que se baja de npm en
+  // el momento; si no coinciden, algunos navegadores (típicamente WebKit)
+  // fallan al correr tests con "Host system is missing dependencies". El
+  // "|| true" evita que un fallo acá bloquee el resto del mensaje.
+  "postCreateCommand": "node -v && npm -v; npx -y playwright@latest install-deps || true; echo '✅ Entorno base listo (Node + npm, dependencias de sistema de Playwright alineadas). Si igual ves un error de \"missing dependencies\" al correr tests, corré: npx playwright install-deps. El resto (package.json, tsconfig, cucumber) lo arma el alumno con Alex.'"
 }

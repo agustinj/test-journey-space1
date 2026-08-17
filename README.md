@@ -2,7 +2,7 @@
 
 Esto es solo el **entorno**, no el proyecto. A propósito no tiene
 `package.json` ni tests — eso es contenido de la Semana 1 y lo arma cada
-alumno junto con Marcos (el Tech Lead). Lo único que resuelve este repo
+alumno junto con Alex (el Tech Lead). Lo único que resuelve este repo
 es que Node, npm y los navegadores de Playwright ya estén instalados y
 funcionando, sin que nadie tenga que configurar nada en su compu.
 
