@@ -1,4 +1,4 @@
-# TestJourney — Environment Starter Kit (Week 1)
+# TestJourney — Environment Starter Kit
 
 This repo only sets up the environment — it's not the course project itself. On purpose, there's no `package.json` and no tests yet: that's Week 1 content, and each student builds it together with Alex, the Tech Lead. What this repo takes care of is making sure Node, npm, and Playwright's browsers are already installed and working, and that the practice site under test is already up and running — so nobody has to configure anything on their own machine.
 
