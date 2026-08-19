@@ -1,55 +1,29 @@
-# TestJourney — Starter de entorno (Semana 1)
+# TestJourney — Environment Starter Kit (Week 1)
 
-Esto es solo el **entorno**, no el proyecto. A propósito no tiene
-`package.json` ni tests — eso es contenido de la Semana 1 y lo arma cada
-alumno junto con Alex (el Tech Lead). Lo único que resuelve este repo
-es que Node, npm y los navegadores de Playwright ya estén instalados y
-funcionando, sin que nadie tenga que configurar nada en su compu.
+This repo only sets up the environment — it's not the course project itself. On purpose, there's no `package.json` and no tests yet: that's Week 1 content, and each student builds it together with Alex, the Tech Lead. What this repo takes care of is making sure Node, npm, and Playwright's browsers are already installed and working, and that the practice site under test is already up and running — so nobody has to configure anything on their own machine.
 
-## Cómo probarlo vos mismo (sin instalar nada)
+## Try it yourself (nothing to install)
 
-1. Subí este repo a GitHub (instrucciones abajo si no lo hiciste todavía).
-2. Entrá al repo en github.com.
-3. Botón verde **"Code"** → pestaña **"Codespaces"** → **"Create codespace on main"**.
-4. Esperá alrededor de un minuto. Se abre un VSCode completo, corriendo en
-   el navegador — no es una versión liviana, es VSCode de verdad.
-5. Abrí la terminal integrada (`Ctrl+ñ` o `Ctrl+\``, o Terminal → New
-   Terminal) y corré:
-   ```
-   node -v
-   npx playwright --version
-   ```
-   Si ves versiones de ambos sin errores, el entorno está sano — así
-   arrancaría cualquier alumno, sin importar qué compu tenga.
+1. Go to this repo's page on github.com.
+2. Click the green "Code" button → "Codespaces" tab → "Create codespace on main".
+3. Wait about a minute. A full VS Code opens in the browser — not a lightweight version, the real thing.
+4. Open the integrated terminal (Terminal → New Terminal, or Ctrl+` / Cmd+`) and run:
 
-Cuando termines de mirarlo, podés simplemente cerrar la pestaña. Un
-Codespace sin actividad se detiene solo después de un rato (no sigue
-gastando tus horas gratis mientras no lo estés usando), y las 120 horas
-gratis por mes de tu cuenta personal de GitHub alcanzan de sobra para
-probar esto y para que un puñado de alumnos completen las 4 semanas.
+```
+node -v
+echo $PLAYWRIGHT_BROWSERS_PATH
+ls $PLAYWRIGHT_BROWSERS_PATH
+curl -I http://localhost:4200
+```
 
-## Cómo subir este repo a GitHub (si no tenés uno todavía)
+If you see a Node version, a path followed by folders like `chromium-xxxx`/`firefox-xxxx`/`webkit-xxxx`, and an `HTTP/1.1 200 OK` from the last command, the environment is healthy — Playwright's browsers are already installed, and the practice site (self-hosted, no external dependencies) is already running on port 4200. This is exactly what any student will see, no matter what computer they're using.
 
-1. Bajá y descomprimí el zip que te mandé.
-2. En github.com, creá un repo nuevo, vacío (sin README ni .gitignore
-   generado por GitHub, para no pisar lo que ya está armado acá).
-3. Desde la carpeta descomprimida, en una terminal:
-   ```
-   git init
-   git add .
-   git commit -m "Entorno base de TestJourney - Semana 1"
-   git branch -M main
-   git remote add origin <URL-de-tu-repo-nuevo>
-   git push -u origin main
-   ```
-4. Recargá la página del repo en GitHub — ahí ya podés usar el botón
-   "Code" → "Codespaces" como en el paso anterior.
+When you're done looking around, you can just close the tab. An idle Codespace stops itself automatically after a while (it won't keep burning your free hours while you're not using it), and the 120 free hours a month on a personal GitHub account are more than enough to test this, and for a handful of students to complete all 4 weeks.
 
-## Qué sigue
+## Get your own copy
 
-Una vez que confirmes que esto funciona, el paso siguiente es que cada
-alumno haga exactamente lo mismo (crear su propio Codespace a partir de
-este mismo repo, o de un fork), y ahí sí arranca la conversación con
-Marcos para construir el framework — checkpoint 1 del runbook (repo
-inicializado, primer commit) prácticamente ya está resuelto por este
-mismo proceso.
+Since this repo is set up as a GitHub Template, there's no manual setup needed: on this repo's page, click "Use this template" → "Create a new repository", give it a name, and you're done. GitHub creates a fresh copy with its own first commit — no local git commands required.
+
+## What's next
+
+Once you've confirmed this works, the next step is for each student to do exactly the same thing: create their own copy of this repo from the template, then open a Codespace on it. From there, the conversation with Alex begins, and that's where the framework actually gets built — checkpoint 1 (repo initialized, first commit) is already taken care of by this same process.
