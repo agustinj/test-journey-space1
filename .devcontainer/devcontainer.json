@@ -1,21 +1,10 @@
 {
   "name": "TestJourney - Week 1 environment",
 
-  // Imagen oficial de Playwright: trae Node + los navegadores (Chromium,
-  // Firefox, WebKit) + todas las librerías de sistema que necesitan para
-  // correr en modo headless, así el foco está en aprender y no en pelear
-  // con instalaciones locales.
-  //
-  // Fijada a una versión específica (no ":latest"): la imagen trae los
-  // navegadores cacheados para una versión exacta de Playwright. Si el tag
-  // de la imagen y la versión de "@playwright/test" que se instala más
-  // adelante no coinciden, Playwright no encuentra el navegador correcto.
-  // Al subir esta versión, actualizar también la instrucción de versión
-  // exacta que se le da al alumno para instalar Playwright.
+  // Playwright: Node + browser support (Chromium, Firefox, WebKit) + deps
   "image": "mcr.microsoft.com/playwright:v1.62.1-jammy",
 
-  // Necesario para correr Docker dentro del Codespace (usado para levantar
-  // ToolShop en local — ver más abajo).
+  // Docker-in-Docker support
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
@@ -31,18 +20,9 @@
     }
   },
 
-  // Corre una sola vez, al crear o reconstruir el Codespace:
-  // 1. Confirma que Node/npm están sanos.
-  // 2. Alinea las dependencias de sistema de Playwright con la versión que
-  //    se instala vía npm (evita fallos de navegadores por versiones
-  //    desalineadas).
-  // 3. Levanta ToolShop self-hosteado en local (localhost:4200 / :8091),
-  //    para no depender del sitio público — ver .devcontainer/setup-toolshop.sh.
-  //    Puede tardar unos minutos la primera vez.
-  "postCreateCommand": "node -v && npm -v; npx -y playwright@latest install-deps || true; bash .devcontainer/setup-toolshop.sh || true; echo '✅ Entorno base listo.'",
+  // One-time setup: env check, deps, local site bootstrap
+  "postCreateCommand": "node -v && npm -v; npx -y playwright@latest install-deps || true; bash .devcontainer/setup-toolshop.sh || true; echo '✅ Base environment ready.'",
 
-  // Corre cada vez que se abre o reanuda el Codespace (no solo al crearlo):
-  // vuelve a levantar los contenedores de ToolShop si se habían detenido,
-  // sin re-sembrar la base de datos (eso solo pasa una vez, en postCreateCommand).
+  // Restarts local site on resume
   "postStartCommand": "bash .devcontainer/start-toolshop.sh || true"
 }
